@@ -1,0 +1,28 @@
+# Ignore generated model and data files
+*.pkl
+
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+
+# Ignore virtual environment folders
+env/
+venv/
+.env
+.venv
+
+# VS Code settings
+.vscode/
+
+# Ignore logs and build artifacts
+*.log
+build/
+dist/
+*.egg-info/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# OS generated files
+.DS_Store
+Thumbs.db
