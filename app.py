@@ -5,21 +5,20 @@ import numpy as np
 import joblib
 import matplotlib.pyplot as plt
 
-# Load the scaler
+
 try:
     scaler = joblib.load('scaler.pkl')
 except FileNotFoundError:
     st.error("Scaler file not found. Please run data_preparation.py first.")
     st.stop()
 
-# App title and description
 st.title("Stock Price Prediction App")
 st.write("This app predicts the next day's closing price. Select a model, enter a stock symbol, and a date range to get started.")
 
-# Sidebar for user inputs
+
 st.sidebar.header("User Inputs")
 
-# Model selection dropdown
+
 model_files = {
     'Linear Regression': 'Linear_Regression.pkl',
     'Polynomial Regression': 'Polynomial_Regression.pkl',
@@ -39,7 +38,7 @@ start_date = st.sidebar.date_input("Start Date", value=pd.to_datetime("2020-01-0
 end_date = st.sidebar.date_input("End Date", value=pd.to_datetime("2023-12-31"))
 predict_button = st.sidebar.button("Predict")
 
-# Function to fetch and prepare data
+
 def prepare_data(symbol, start, end):
     data = yf.download(symbol, start=start, end=end)
     if data.empty:
@@ -69,10 +68,10 @@ except FileNotFoundError:
 if predict_button:
     X_scaled, data = prepare_data(stock_symbol, start_date, end_date)
     if X_scaled is not None and data is not None:
-        # Make predictions
+        
         predictions = model.predict(X_scaled)
         
-        # Display results
+       
         st.subheader(f"Prediction Results using {selected_model}")
         results_df = pd.DataFrame({
             'Date': data.index,
@@ -81,7 +80,7 @@ if predict_button:
         })
         st.dataframe(results_df)
         
-        # Visualization
+       
         st.subheader("Actual vs Predicted Prices")
         fig, ax = plt.subplots(figsize=(10, 5))
         ax.plot(data.index, data['Next_Close'], label='Actual')
@@ -91,7 +90,7 @@ if predict_button:
         ax.legend()
         st.pyplot(fig)
 
-# Hypothetical Prediction Section
+
 st.sidebar.header("Hypothetical Prediction")
 open_price = st.sidebar.number_input("Open Price", value=0.0, format="%.2f")
 high_price = st.sidebar.number_input("High Price", value=0.0, format="%.2f")
