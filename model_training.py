@@ -6,7 +6,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.svm import SVR
 
-# Load the prepared data
+
 X_train = joblib.load('X_train.pkl')
 y_train = joblib.load('y_train.pkl')
 
